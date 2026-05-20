@@ -1,0 +1,4 @@
+.env
+readme.md
+node_modules/
+requests/
