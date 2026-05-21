@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
-const password = process.argv[2];
-const url = process.env.MONGODB_URI;
+const mongoose = require("mongoose")
+//const password = process.argv[2]
+const url = process.env.MONGODB_URI
 
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", false)
 mongoose
   .connect(url, { family: 4 })
-  .then((result) => {
-    console.log("connected to mongodb");
+  .then(() => {
+    console.log("connected to mongodb")
   })
   .catch((error) => {
-    console.log("error connecting to mongodb", error.message);
-  });
+    console.log("error connecting to mongodb", error.message)
+  })
 
 const bookSchema = new mongoose.Schema({
   title: {
@@ -25,7 +25,7 @@ const bookSchema = new mongoose.Schema({
   },
   year: {
     type: String,
-    minLength: 5,
+    minLength: 4,
     required: true,
   },
   genre: {
@@ -34,18 +34,17 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   read: {
-    type: String,
-    minLength: 4,
-    required: true,
+    type: Boolean,
+    default: false,
   },
-});
+})
 
 bookSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   },
-});
+})
 
-module.exports = mongoose.model("BooKApi", bookSchema);
+module.exports = mongoose.model("BooKApi", bookSchema)
