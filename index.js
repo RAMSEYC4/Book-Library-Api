@@ -9,20 +9,19 @@ app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
 
 //1 GET information
 app.get("/info", (req, res) => {
-  res.send(`
-  <h1>This book library has ${BooKApi.length} for now</h1>
-  <p>At ${new Date()}</p>  
-  `)
+  BooKApi.countDocuments().then((bookRecords) => {
+    res.send(`
+    <h1>This book library has ${bookRecords} books for now</h1>
+    <p>At ${new Date()}</p>  
+    `)
+  })
 })
 
 //2 GET all books
 app.get("/api/books", (req, res, next) => {
   BooKApi.find({})
     .then((bookRecords) => {
-      if (bookRecords) {
-        return res.json(bookRecords)
-      }
-      res.status(404).end()
+      res.json(bookRecords)
     })
     .catch((error) => next(error))
 })
@@ -42,10 +41,15 @@ app.get("/api/books/:id", (req, res, next) => {
 
 //4 POST add a book
 app.post("/api/books", (req, res, next) => {
-  console.log(req)
   const body = req.body
   //Before adding check if data has content
-  if (!body.title || !body.author || !body.year || !body.genre || !body.read) {
+  if (
+    !body.title ||
+    !body.author ||
+    !body.year ||
+    !body.genre ||
+    body.read === undefined
+  ) {
     return res.status(400).json({
       error: "Book information missing",
     })
@@ -141,7 +145,7 @@ const errorHandler = (error, req, res, next) => {
   } else if (error.name === "ValidationError") {
     return res.status(400).json({ error: error.message })
   }
-  next()
+  next(error)
 }
 
 app.use(unknownEndPoint)
