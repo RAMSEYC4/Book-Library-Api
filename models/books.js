@@ -1,16 +1,5 @@
+// defines the Mongoose schema for books
 const mongoose = require("mongoose")
-//const password = process.argv[2]
-const url = process.env.MONGODB_URI
-
-mongoose.set("strictQuery", false)
-mongoose
-  .connect(url, { family: 4 })
-  .then(() => {
-    console.log("connected to mongodb")
-  })
-  .catch((error) => {
-    console.log("error connecting to mongodb", error.message)
-  })
 
 const bookSchema = new mongoose.Schema({
   title: {
