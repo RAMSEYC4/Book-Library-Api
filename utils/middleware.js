@@ -1,12 +1,11 @@
 //morgan, unknownEndpoint, errorHandler
 const logger = require("../utils/logger")
-const morgan = require("morgan")
 
-const requetLogger = (req, res, next) => {
-  logger.infor("Method", req.method)
-  logger.infor("Path", req.Path)
-  logger.infor("Body", req.Body)
-  logger.infor("-----------------")
+const requestLogger = (req, res, next) => {
+  logger.info("Method", req.method)
+  logger.info("Path", req.path)
+  logger.info("Body", req.body)
+  logger.info("-----------------")
   next()
 }
 
@@ -24,4 +23,4 @@ const errorHandler = (error, req, res, next) => {
   next(error)
 }
 
-module.exports = { unknownEndPoint, errorHandler, morgan, requetLogger }
+module.exports = { unknownEndPoint, errorHandler, requestLogger }

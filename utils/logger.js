@@ -5,7 +5,7 @@ const info = (...params) => {
 }
 
 const error = (...error) => {
-  console.log(error)
+  console.error(error)
 }
 
 module.exports = { info, error }
