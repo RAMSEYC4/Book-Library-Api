@@ -1,10 +1,10 @@
 // defines the Mongoose schema for books
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
   title: {
     type: String,
-    minLength: 5,
+    minLength: 3,
     required: true,
   },
   author: {
@@ -26,14 +26,14 @@ const bookSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-})
+});
 
 bookSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
   },
-})
+});
 
-module.exports = mongoose.model("BooKApi", bookSchema)
+module.exports = mongoose.model("BooKApi", bookSchema);

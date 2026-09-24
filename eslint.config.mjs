@@ -18,7 +18,7 @@ export default [
       "@stylistic/js/indent": ["error", 2],
       "@stylistic/js/linebreak-style": ["error", "unix"],
       "@stylistic/js/quotes": ["error", "double"],
-      "@stylistic/js/semi": ["error", "never"],
+      "@stylistic/js/semi": ["error", "always"],
       eqeqeq: "error",
       "no-trailing-spaces": "error",
       "object-curly-spacing": ["error", "always"],
