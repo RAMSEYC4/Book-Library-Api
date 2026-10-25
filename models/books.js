@@ -26,6 +26,13 @@ const bookSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  //many books can have 1 user
+  user: {
+    //where i store
+    type: mongoose.Schema.Types.ObjectId,
+    //where to find the real thing
+    ref: "User",
+  },
 });
 
 bookSchema.set("toJSON", {
@@ -36,4 +43,5 @@ bookSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("BooKApi", bookSchema);
+const books = mongoose.model("Book", bookSchema);
+module.exports = books;

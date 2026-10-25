@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const logger = require("./utils/logger.js");
 const config = require("./utils/config.js");
 const booksRouter = require("./controllers/books.js");
+const userRouter = require("./controllers/user.js");
+const loginRouter = require("./controllers/login.js");
 const middleware = require("./utils/middleware.js");
 
 const app = express();
@@ -21,6 +23,8 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use("/books", booksRouter);
+app.use("/users", userRouter);
+app.use("/login", loginRouter);
 
 app.use(middleware.unknownEndPoint);
 app.use(middleware.errorHandler);
